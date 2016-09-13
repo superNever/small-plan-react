@@ -1,0 +1,22 @@
+{
+  "name": "small-plan-input",
+  "version": "1.0.0",
+  "description": "small-plan-input",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/superNever/small-plan-react-input.git"
+  },
+  "keywords": [
+    "small-plan-input"
+  ],
+  "author": "supernever",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/superNever/small-plan-react-input/issues"
+  },
+  "homepage": "https://github.com/superNever/small-plan-react-input#readme"
+}
