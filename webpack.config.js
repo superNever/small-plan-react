@@ -22,7 +22,7 @@ const config = {
 			{
 				test:/\.js/,
 				exclude: /node_modules/,
-				loader: 'babel-loader?presets[]=es2015&presets[]=react'
+				loader: 'babel-loader?presets[]=es2015&presets[]=es2016&presets[]=react'
 			}
 		]
 	},
