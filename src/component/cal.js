@@ -1,6 +1,5 @@
 // cal.js
 import React,{Component} from 'react';
-import PointTarget from 'react-point'
 import ReactDOM from 'react-dom';
 import '../vendor/toLocalString.js'
 import  '../styles/cal.less';
