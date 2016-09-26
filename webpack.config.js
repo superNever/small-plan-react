@@ -22,13 +22,13 @@ const config = {
 			{
 				test:/\.js/,
 				exclude: /node_modules/,
-				loader: 'babel-loader?presets[]=es2015&presets[]=stage-0&presets[]=react'
+				loader: 'babel'
 			}
 		]
 	},
 	resolve:['','.js','.json'],
 	plugins: [
-		new ExtractTextPlugin("[name][hash:8].css"),
+		new ExtractTextPlugin("bundle[hash:8].css"),
 		new htmlWebpackPlugin({
 			template: './src/index.html',
 			filename: './index.html'
