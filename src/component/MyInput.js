@@ -2,9 +2,10 @@ import React,{Component} from 'react';
 import '../styles/myInput.less'
 export default class MyInput extends Component{
 	constructor(props){
-	       super(props);
-	       {/** 声明一大推label、input、span的各种状态样式 **/}
-	       this.state = {
+	       super(props);	
+	}
+	  //{/** 声明一大推label、input、span的各种状态样式 **/}
+	       state = {
 	           changeValue: '',
 	           inputClass:'input-class blur-class',
 	           focusClass:'input-class focus-class',
@@ -15,21 +16,21 @@ export default class MyInput extends Component{
 	           spanShow: 'span-class span-show',
 	           placeholder: this.props.name ? "请输入"+this.props.name :"请输入信息"
 	       };
-	   		{/**input值改变事件**/}
-	       this.changeHandler = (event)=>{
+		//{/**input值改变事件**/}
+	       changeHandler = (event)=>{
 	       		let obj = {};
 	       		obj.changeValue = event.target.value;
 				this.setState(obj);
 			}
-			{/**input，focus值改变事件**/}
-			this.focusHandler = (event)=>{
+		//{/**input，focus值改变事件**/}
+			focusHandler = (event)=>{
 				event.preventDefault();
 				event.target.click();
 				this.setState({waringClass:this.state.spanHide})
 				this.setState({inputClass:this.state.focusClass})
 			}
-			{/**input,blur值改变事件**/}
-			this.blurHandler = (event)=>{
+		//{/**input,blur值改变事件**/}
+			blurHandler = (event)=>{
 				event.preventDefault();
 				let boolValue = this.testRegExp(event.target.getAttribute('type'),event.target.value);
 				{/**判断是否匹配规则**/}
@@ -42,29 +43,27 @@ export default class MyInput extends Component{
 					this.setState({inputClass:this.state.blurClass})
 				}				
 			}
-			{/**点击浮层sapn的事件**/}
-			this.spanClick = (event)=>{
+		//{	/**点击浮层sapn的事件**/}
+			spanClick = (event)=>{
 				event.target.previousSibling.focus();	
 			}
-			{/**正则匹配规则**/}
-			this.testRegExp = (type,value)=>{
-				let boolValue,pattern;
-				switch(type.toLowerCase()){
-					case 'email':
-						pattern = '^\\w+@[\\w|.]+\\.+\\w+$';				
-						break;
-				   	case 'phone':
-				   		pattern = '((\\d{11})|^((\\d{7,8})|(\\d{4}|\\d{3})-(\\d{7,8})|(\\d{4}|\\d{3})-(\\d{7,8})-(\\d{4}|\\d{3}|\\d{2}|\\d{1})|(\\d{7,8})-(\\d{4}|\\d{3}|\\d{2}|\\d{1}))$)';		
-				   		break;
-				   	case 'text':
-				   		pattern = '\\S+';		
-				   		break;
-				}
-				let regexp = new RegExp(pattern, 'g');
-				return boolValue = regexp.test(value);
+		//{/**正则匹配规则**/}
+		testRegExp = (type,value)=>{
+			let boolValue,pattern;
+			switch(type.toLowerCase()){
+				case 'email':
+					pattern = '^\\w+@[\\w|.]+\\.+\\w+$';				
+					break;
+			   	case 'phone':
+			   		pattern = '((\\d{11})|^((\\d{7,8})|(\\d{4}|\\d{3})-(\\d{7,8})|(\\d{4}|\\d{3})-(\\d{7,8})-(\\d{4}|\\d{3}|\\d{2}|\\d{1})|(\\d{7,8})-(\\d{4}|\\d{3}|\\d{2}|\\d{1}))$)';		
+			   		break;
+			   	case 'text':
+			   		pattern = '\\S+';		
+			   		break;
 			}
-	}
-	
+			let regexp = new RegExp(pattern, 'g');
+			return boolValue = regexp.test(value);
+		}
 	render(){
 		{/**name\placeholder\type解析**/}
 		let name = this.props.name ? this.props.name+":" :"";
