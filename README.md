@@ -13,6 +13,6 @@ npm start
 //打开
 localhost:8080
 ```
-# small-plan-react-calendar
+# small-plan-react-calculator
 一个小的计算器，玩玩
 
