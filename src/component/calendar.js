@@ -8,32 +8,37 @@ class CalendarHead extends Component{
 		super(props);
 		this.state = {
 			month:this.props.month,
-			year:this.props.year
+			year:this.props.year,
+			flag:this.props.flag
 		}
 	}
 	handleLeftClick(){
 		let newMonth = parseInt(this.state.month) - 1;
 		let year = this.state.year;
+		let currentM = new Date().getMonth()+1;
 		if(newMonth < 1){
 			year --;
 			newMonth = 12;
 		}
 		this.state.month = newMonth;
 		this.state.year=year;
+		this.state.flag = (currentM==newMonth);
 		this.setState(this.state);
-		this.props.updateFilter(year,newMonth);
+		this.props.updateFilter(year,newMonth,this.state.flag);
 	}
 	handleRightClick(){
 		let newMonth = parseInt(this.state.month) + 1;
 		let year = this.state.year;
+		let currentM = new Date().getMonth()+1;
 		if(newMonth > 12){
 			year ++;
 			newMonth = 1;
 		}
 		this.state.month = newMonth;
 		this.state.year=year;
+		this.state.flag = (currentM==newMonth);
 		this.setState(this.state);
-		this.props.updateFilter(year,newMonth);
+		this.props.updateFilter(year,newMonth,this.state.flag);
 	}
 	render(){
 		return (
@@ -70,23 +75,25 @@ class CalendarBody extends Component{
 		return Weekdays; 	
 	}
 	render(){
-		var arry1 = [],arry2 = [];
-		var getDays = this.getMonthDays(),
+		let arry1 = [],arry2 = [];
+		let getDays = this.getMonthDays(),
 			FirstDayWeek = this.getFirstDayWeek(),
-			curday = this.props.day ;
-			for(var i = 0 ;i < FirstDayWeek; i++ ){
+			curday = this.props.day,
+			curMonth = this.props.month,
+			flag = this.props.flag;
+			for(let i = 0 ;i < FirstDayWeek; i++ ){
 				arry1[i] = i;
 			}
-			for(var i = 0 ;i < getDays; i++ ){
+			for(let i = 0 ;i < getDays; i++ ){
 				arry2[i] = (i+1);
 			}
 			
-		var node1 = arry1.map(function(item){
+		let node1 = arry1.map(function(item){
 			return <li key = {item}></li> // 这里不能加引号，因为要返回HTML标签，而不是html字符串，
 							//这是JSX语法 HTML 语言直接写在 JavaScript 语言之中，不加任何引号。
 		})
-		var node2 = arry2.map(function(item){
-			return (curday == item)?<li key = {item} style={{"backgroundColor": "#eee"}}>{item}</li>: <li key={item}>{item}</li>
+		let node2 = arry2.map(function(item){
+			return (curday == item && flag)?<li key = {item} style={{"backgroundColor": "#eee"}}>{item}</li>: <li key={item}>{item}</li>
 		})
 
 		return (
@@ -119,7 +126,8 @@ export default class Calendar extends Component{
 		this.state = {
 			year:this.formatDate(newDate,'yyyy'),
 			month:parseInt(this.formatDate(newDate,'MM')),
-			day:parseInt(this.formatDate(newDate,'dd')) 
+			day:parseInt(this.formatDate(newDate,'dd')) ,
+			flag:true
 
 		}
 	}
@@ -160,10 +168,11 @@ export default class Calendar extends Component{
         return fmt;
 
 	}
-	handleFilterUpdate(filterYear,filterMonth){
+	handleFilterUpdate(filterYear,filterMonth,filterFlag){
 		this.setState({
 	    	year: filterYear,
-	    	month: filterMonth
+	    	month: filterMonth,
+	    	flag:filterFlag
 	    });
 
 	}
@@ -177,7 +186,8 @@ export default class Calendar extends Component{
 				<CalendarBody 
 					year = {this.state.year}
 					month = {this.state.month}
-					day = {this.state.day}/>
+					day = {this.state.day}
+					flag = {this.state.flag}/>
 			</div>
 		)
 	}
