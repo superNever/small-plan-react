@@ -16,3 +16,6 @@ localhost:8080
 # small-plan-react-calculator
 一个小的计算器，玩玩
 
+# small-plan-react-calendar
+日历
+
